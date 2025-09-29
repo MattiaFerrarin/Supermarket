@@ -1,0 +1,11 @@
+supermercato, 
+carrello della spesa, 
+file JSON, 
+(lista di prodotti, cliente con carta fedeltà), 
+aggiuntivo: scontrino finale
+
+
+
+Fai due sezioni dalla starterpage:
+	Catalogo (in cui puoi aggiungere prodotti nuovi (aggiungi apre un form, ovviamente torna l'oggetto con eventi))
+	Cassa (dove c'hai una lista "Carrello" e puoi scansionare un nuovo prodotto (fai sia inserisci codice e sia seleziona graficamente (torna oggetto con eventi)), poi c'hai Paga e puoi pagare e ti stampa lo scontrino (ps: anche seleziona se il cliente ha la fidelity))
