@@ -38,6 +38,7 @@
             this.btn_pay = new System.Windows.Forms.Button();
             this.chb_fidelity = new System.Windows.Forms.CheckBox();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
+            this.printDialog1 = new System.Windows.Forms.PrintDialog();
             this.SuspendLayout();
             // 
             // listView1
@@ -123,6 +124,10 @@
             this.printPreviewDialog1.Name = "printPreviewDialog1";
             this.printPreviewDialog1.Visible = false;
             // 
+            // printDialog1
+            // 
+            this.printDialog1.UseEXDialog = true;
+            // 
             // Checkout
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -152,5 +157,6 @@
         private System.Windows.Forms.Button btn_pay;
         private System.Windows.Forms.CheckBox chb_fidelity;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
+        private System.Windows.Forms.PrintDialog printDialog1;
     }
 }

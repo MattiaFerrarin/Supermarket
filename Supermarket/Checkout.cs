@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Forms;
 
 namespace Supermarket
@@ -49,7 +50,7 @@ namespace Supermarket
             listView1.Items.Clear();
             foreach (var item in Cart)
             {
-                var lstItem = new ListViewItem();
+                var lstItem = new System.Windows.Forms.ListViewItem();
                 lstItem.Text = item.Item1.Name;
                 lstItem.SubItems.Add(item.Item1.Code);
                 lstItem.SubItems.Add(item.Item2.ToString());
@@ -90,10 +91,24 @@ namespace Supermarket
             printPreviewDialog1.Document = doc;
             printPreviewDialog1.Width = 400;
             printPreviewDialog1.Height = 600;
-            // Mostra e printa il doc
-            if (printPreviewDialog1.ShowDialog() == DialogResult.OK)
+
+            printDialog1.Document = doc;
+            // Manipola printPreview per stampare direttamente da lì premendo l'icona di stampa
+            ToolStripButton b = new ToolStripButton();
+            b.Image = Properties.Resources.Print;
+            b.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            b.Click += printPreview_PrintClick;
+            ((ToolStrip)(printPreviewDialog1.Controls[1])).Items.RemoveAt(0);
+            ((ToolStrip)(printPreviewDialog1.Controls[1])).Items.Insert(0, b);
+            printPreviewDialog1.ShowDialog();
+        }
+
+        // Function for sending the actual printing
+        private void printPreview_PrintClick(object sender, EventArgs e)
+        {
+            if (printDialog1.ShowDialog() == DialogResult.OK)
             {
-                doc.Print();
+                printDialog1.Document.Print();
             }
         }
 
