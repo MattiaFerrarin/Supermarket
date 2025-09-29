@@ -188,7 +188,7 @@ namespace Supermarket
 
             // Prints a QR code to the website
             using (QRCodeGenerator qrGenerator = new QRCoder.QRCodeGenerator())
-            using (QRCodeData qrCodeData = qrGenerator.CreateQrCode(SupermarketData.Website, QRCoder.QRCodeGenerator.ECCLevel.Q))  //ASK THIS
+            using (QRCodeData qrCodeData = qrGenerator.CreateQrCode(SupermarketData.Website, QRCoder.QRCodeGenerator.ECCLevel.Q))
             using (QRCode qrCode = new QRCoder.QRCode(qrCodeData))
             using (Bitmap qrCodeImage = qrCode.GetGraphic(5))
             {

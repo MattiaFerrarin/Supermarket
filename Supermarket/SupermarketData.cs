@@ -15,6 +15,6 @@ namespace Supermarket
         public static string CityCode = "VI";
         public static string PI = "00015430080";
         public static string Phone = "+39 1212323445";
-        public static string Website = "https://google.com";
+        public static string Website = "https://github.com/MattiaFerrarin/Supermarket";
     }
 }
