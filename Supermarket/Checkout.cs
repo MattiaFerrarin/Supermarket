@@ -91,7 +91,7 @@ namespace Supermarket
             doc.PrintPage += PrintReceipt;
             printPreviewDialog1.Document = doc;
             printPreviewDialog1.Width = 400;
-            printPreviewDialog1.Height = 600;
+            printPreviewDialog1.Height = 800;
 
             printDialog1.Document = doc;
             // Manipola printPreview per stampare direttamente da lì premendo l'icona di stampa
