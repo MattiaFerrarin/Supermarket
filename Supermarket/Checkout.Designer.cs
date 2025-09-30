@@ -39,6 +39,7 @@
             this.chb_fidelity = new System.Windows.Forms.CheckBox();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // listView1
@@ -46,7 +47,8 @@
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
-            this.columnHeader3});
+            this.columnHeader3,
+            this.columnHeader4});
             this.listView1.FullRowSelect = true;
             this.listView1.GridLines = true;
             this.listView1.HideSelection = false;
@@ -60,7 +62,7 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Nome";
-            this.columnHeader1.Width = 119;
+            this.columnHeader1.Width = 105;
             // 
             // columnHeader2
             // 
@@ -70,7 +72,7 @@
             // columnHeader3
             // 
             this.columnHeader3.Text = "Quantità";
-            this.columnHeader3.Width = 54;
+            this.columnHeader3.Width = 52;
             // 
             // label1
             // 
@@ -128,6 +130,11 @@
             // 
             this.printDialog1.UseEXDialog = true;
             // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Costo";
+            this.columnHeader4.Width = 41;
+            // 
             // Checkout
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -158,5 +165,6 @@
         private System.Windows.Forms.CheckBox chb_fidelity;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
         private System.Windows.Forms.PrintDialog printDialog1;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
     }
 }

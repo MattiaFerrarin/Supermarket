@@ -54,6 +54,7 @@ namespace Supermarket
                 lstItem.Text = item.Item1.Name;
                 lstItem.SubItems.Add(item.Item1.Code);
                 lstItem.SubItems.Add(item.Item2.ToString());
+                lstItem.SubItems.Add(item.Item1.Cost.ToString("0.00")+"€");
                 listView1.Items.Add(lstItem);
             }
         }
@@ -120,15 +121,17 @@ namespace Supermarket
             float totalCost = 0;
             foreach(var item in Cart)
             {
-                mainData += ($"{item.Item1.Name}" + (item.Item2>1 ? $" X {item.Item2}" : "")).PadRight(32)+$"{  "ERR"  }\n"; // Cost not integrated into the system
-                totalCost += 0; // Cost not integrated into the system
+                mainData += ($"{item.Item1.Name}" + (item.Item2>1 ? $" X {item.Item2}" : "")).PadRight(32)+$"{item.Item1.Cost.ToString("0.00")}\n";
+                totalCost += item.Item1.Cost;
             }
             if (chb_fidelity.Checked)
             {
-                mainData += "\n-".PadRight(37, '-')+ "\nCARTA FEDELTÀ".PadRight(32)+$"-{totalCost*0.03}";
+                mainData += "\n-".PadRight(37, '-')+ "\nCARTA FEDELTÀ".PadRight(32)+$"-{(totalCost*0.03f).ToString("0.00")}";
+                totalCost = totalCost * 0.97f;
             }
             mainData += "\n-".PadRight(37,'-');
-            string totalCostData = $"TOTALE EURO".PadRight(26)+$"{  "ERR"  }"; // Cost not integrated into the system, would be totalCost
+            totalCost = (float)Math.Round(totalCost,2);
+            string totalCostData = $"TOTALE EURO".PadRight(25)+$"{totalCost.ToString("0.00")}";
 
             string footerData = $"\n\n{DateTime.Now.ToShortDateString()} {DateTime.Now.ToShortTimeString()}\nDOCUMENTO N. {  "0000-0000"  }"; // Document number not specified from the system
             footerData += "\n\nCon il programma fedeltà risparmi il 3% su ogni acquisto!\nPartecipa ora!";

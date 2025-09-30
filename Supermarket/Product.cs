@@ -10,10 +10,12 @@ namespace Supermarket
     {
         public override string Name { get; set; }
         public string Code { get; set; }
-        public Product(string name, string code) 
+        public float Cost { get; set; }
+        public Product(string name, string code, float cost) 
         {
             Name = name;
             Code = code;
+            Cost = cost;
         }
     }
 }

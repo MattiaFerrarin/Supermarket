@@ -63,6 +63,12 @@
     </Compile>
     <Compile Include="DatabaseClasses.cs" />
     <Compile Include="IODataHandler.cs" />
+    <Compile Include="MessageBoxNumericUpDown.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MessageBoxNumericUpDown.Designer.cs">
+      <DependentUpon>MessageBoxNumericUpDown.cs</DependentUpon>
+    </Compile>
     <Compile Include="MessageBoxTextbox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +102,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Checkout.resx">
       <DependentUpon>Checkout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MessageBoxNumericUpDown.resx">
+      <DependentUpon>MessageBoxNumericUpDown.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MessageBoxTextbox.resx">
       <DependentUpon>MessageBoxTextbox.cs</DependentUpon>

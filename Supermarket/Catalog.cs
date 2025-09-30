@@ -46,10 +46,15 @@ namespace Supermarket
                 if (msbcode.ShowDialog() == DialogResult.OK)
                 {
                     string code = msbcode.Data;
-                    Navigator.CurrentLocation.Items.Add(new Product(name, code));
-                    Navigator.CurrentLocation.Items.Sort(CompareByType);
-                    UpdateListView();
-                    IODataHandler.UpdateDatabase(Navigator.Root);
+                    MessageBoxNumericUpDown msbcost = new MessageBoxNumericUpDown("Inserisci Costo del Prodotto", "c>0");
+                    if(msbcost.ShowDialog() == DialogResult.OK)
+                    {
+                        float cost = msbcost.Data;
+                        Navigator.CurrentLocation.Items.Add(new Product(name, code, cost));
+                        Navigator.CurrentLocation.Items.Sort(CompareByType);
+                        UpdateListView();
+                        IODataHandler.UpdateDatabase(Navigator.Root);
+                    }
                 }
             }
         }
@@ -77,7 +82,7 @@ namespace Supermarket
                     string name = msbname.Data;
                     if (Navigator.CurrentLocation.Items[listView1.SelectedIndices[0]].GetType() == typeof(Product))
                     {
-                        Navigator.CurrentLocation.Items[listView1.SelectedIndices[0]] = new Product(name, ((Product)Navigator.CurrentLocation.Items[listView1.SelectedIndices[0]]).Code);
+                        Navigator.CurrentLocation.Items[listView1.SelectedIndices[0]] = new Product(name, ((Product)Navigator.CurrentLocation.Items[listView1.SelectedIndices[0]]).Code, ((Product)Navigator.CurrentLocation.Items[listView1.SelectedIndices[0]]).Cost);
                     }
                     else if (Navigator.CurrentLocation.Items[listView1.SelectedIndices[0]].GetType() == typeof(DatabaseNode))
                     {
@@ -131,7 +136,7 @@ namespace Supermarket
                 else
                 {
                     listView1.Items[listView1.Items.Count - 1].BackColor = Color.FromArgb(200, 204, 232, 255);
-                    listView1.Items[listView1.Items.Count - 1].ToolTipText = "Codice: \n"+((Product)item).Code;
+                    listView1.Items[listView1.Items.Count - 1].ToolTipText = "Codice: \n" + ((Product)item).Code + "\nCosto:\n" + ((Product)item).Cost.ToString("0.00")+"€";
                 }
                 SetListViewItemHeight(listView1, 40);
             }
