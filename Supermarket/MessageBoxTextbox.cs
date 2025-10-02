@@ -7,78 +7,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Navigation;
 
 namespace Supermarket
 {
     public partial class MessageBoxTextbox : Form
     {
         public string Data { get; set; }
-        public string SpecialConditions { get; set; }
-        /*
-         * Special Condition Standard:
-         *   d (= differentThan) + string
-         *   l (= length operation) + [==|!=|>=|>|<=|<] + int
-         *   "" (= noOperation (always true))
-         */
-        public MessageBoxTextbox(string title, string specialConditions = "")
+        public Func<string,bool> ConditionFunction { get; set; }
+        public MessageBoxTextbox(string title, Func<string, bool> condition = null)
         {
             InitializeComponent();
             lbl_title.Text = title;
-            SpecialConditions = specialConditions;
+            if (condition == null)
+            {
+                ConditionFunction = (s) => { return true; };
+            }
+            else
+            {
+                ConditionFunction = condition;
+            }
         }
 
         private void btn_confirm_Click(object sender, EventArgs e)
         {
-            bool condition = true;
-            if (SpecialConditions.StartsWith("d"))
-            {
-                if (SpecialConditions[1] == '!')
-                {
-                    if(SpecialConditions.Length > 2)
-                    {
-                        condition = txb_input.Text != SpecialConditions.Substring(2);
-                    }
-                    else
-                    {
-                        condition = txb_input.Text != "";
-                    }
-                }
-            }
-            else if (SpecialConditions.StartsWith("l"))
-            {
-                if(SpecialConditions.Substring(1,2) == "==")
-                {
-                    condition = txb_input.Text.Length == int.Parse(SpecialConditions.Substring(3));
-                }
-                else if (SpecialConditions.Substring(1, 2) == "!=")
-                {
-                    condition = txb_input.Text.Length != int.Parse(SpecialConditions.Substring(3));
-                }
-                else if (SpecialConditions[1] == '>')
-                {
-                    if (SpecialConditions[2] == '=')
-                    {
-                        condition = txb_input.Text.Length >= int.Parse(SpecialConditions.Substring(3));
-                    }
-                    else
-                    {
-                        condition = txb_input.Text.Length > int.Parse(SpecialConditions.Substring(2));
-                    }
-                }
-                else if (SpecialConditions[1] == '<')
-                {
-                    if (SpecialConditions[2] == '=')
-                    {
-                        condition = txb_input.Text.Length <= int.Parse(SpecialConditions.Substring(3));
-                    }
-                    else
-                    {
-                        condition = txb_input.Text.Length < int.Parse(SpecialConditions.Substring(2));
-                    }
-                }
-            }
-
-            if (condition)
+            if (ConditionFunction.Invoke(txb_input.Text))
             {
                 Data = txb_input.Text;
                 DialogResult = DialogResult.OK;

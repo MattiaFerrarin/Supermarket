@@ -12,60 +12,27 @@ namespace Supermarket
 {
     public partial class MessageBoxNumericUpDown : Form
     {
-        public float Data { get; set; }
-        public string SpecialConditions { get; set; }
-        /*
-         * Special Condition Standard:
-         *   c (= comparison operation) + [==|!=|>=|>|<=|<] + float
-         *   "" (= noOperation (always true))
-         */
-        public MessageBoxNumericUpDown(string title, string specialConditions = "")
+        public Decimal Data { get; set; }
+        public Func<Decimal, bool> ConditionFunction { get; set; }
+        public MessageBoxNumericUpDown(string title, Func<Decimal, bool> condition = null)
         {
             InitializeComponent();
             lbl_title.Text = title;
-            SpecialConditions = specialConditions;
+            if (condition == null)
+            {
+                ConditionFunction = (n) => { return true; };
+            }
+            else
+            {
+                ConditionFunction = condition;
+            }
         }
 
         private void btn_confirm_Click(object sender, EventArgs e)
         {
-            bool condition = true;
-            if (SpecialConditions.StartsWith("c"))
+            if (ConditionFunction.Invoke(nmu_input.Value))
             {
-                if (SpecialConditions.Substring(1, 2) == "==")
-                {
-                    condition = (float)(nmu_input.Value) == float.Parse(SpecialConditions.Substring(3));
-                }
-                else if (SpecialConditions.Substring(1, 2) == "!=")
-                {
-                    condition = (float)(nmu_input.Value) != float.Parse(SpecialConditions.Substring(3));
-                }
-                else if (SpecialConditions[1] == '>')
-                {
-                    if (SpecialConditions[2] == '=')
-                    {
-                        condition = (float)(nmu_input.Value) >= float.Parse(SpecialConditions.Substring(3));
-                    }
-                    else
-                    {
-                        condition = (float)(nmu_input.Value) > float.Parse(SpecialConditions.Substring(2));
-                    }
-                }
-                else if (SpecialConditions[1] == '<')
-                {
-                    if (SpecialConditions[2] == '=')
-                    {
-                        condition = (float)(nmu_input.Value) <= float.Parse(SpecialConditions.Substring(3));
-                    }
-                    else
-                    {
-                        condition = (float)(nmu_input.Value) < float.Parse(SpecialConditions.Substring(3));
-                    }
-                }
-            }
-
-            if (condition)
-            {
-                Data = (float)nmu_input.Value;
+                Data = nmu_input.Value;
                 DialogResult = DialogResult.OK;
                 Close();
             }

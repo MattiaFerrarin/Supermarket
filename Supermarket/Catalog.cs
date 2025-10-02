@@ -38,18 +38,18 @@ namespace Supermarket
 
         private void tsmi_addProduct_Click(object sender, EventArgs e)
         {
-            MessageBoxTextbox msbname = new MessageBoxTextbox("Inserisci Nome del Prodotto", "d!");
+            MessageBoxTextbox msbname = new MessageBoxTextbox("Inserisci Nome del Prodotto", (string s) => { if (s.Length > 0) { return true; } else { return false; } });
             if (msbname.ShowDialog() == DialogResult.OK)
             {
                 string name = msbname.Data;
-                MessageBoxTextbox msbcode = new MessageBoxTextbox("Inserisci Codice del Prodotto", "l==12");
+                MessageBoxTextbox msbcode = new MessageBoxTextbox("Inserisci Codice del Prodotto", (string s) => { if (s.Length==12 && IODataHandler.GetProductByCode(s) == null) { return true; } else { return false; } });
                 if (msbcode.ShowDialog() == DialogResult.OK)
                 {
                     string code = msbcode.Data;
-                    MessageBoxNumericUpDown msbcost = new MessageBoxNumericUpDown("Inserisci Costo del Prodotto", "c>0");
+                    MessageBoxNumericUpDown msbcost = new MessageBoxNumericUpDown("Inserisci Costo del Prodotto", (Decimal n) => { if(n>0) { return true; } else { return false; } });
                     if(msbcost.ShowDialog() == DialogResult.OK)
                     {
-                        float cost = msbcost.Data;
+                        float cost = (float)msbcost.Data;
                         Navigator.CurrentLocation.Items.Add(new Product(name, code, cost));
                         Navigator.CurrentLocation.Items.Sort(CompareByType);
                         UpdateListView();
@@ -61,7 +61,7 @@ namespace Supermarket
 
         private void tsmi_addSection_Click(object sender, EventArgs e)
         {
-            MessageBoxTextbox msbname = new MessageBoxTextbox("Inserisci Nome della Sezione", "d!");
+            MessageBoxTextbox msbname = new MessageBoxTextbox("Inserisci Nome della Sezione", (string s) => { if (s.Length > 0) { return true; } else { return false; } });
             if (msbname.ShowDialog() == DialogResult.OK)
             {
                 string name = msbname.Data;
@@ -76,7 +76,7 @@ namespace Supermarket
         {
             if (listView1.SelectedIndices.Count > 0)
             {
-                MessageBoxTextbox msbname = new MessageBoxTextbox("Inserisci nuovo Nome", "d!");
+                MessageBoxTextbox msbname = new MessageBoxTextbox("Inserisci nuovo Nome", (string s) => { if (s.Length > 0) { return true; } else { return false; } });
                 if (msbname.ShowDialog() == DialogResult.OK)
                 {
                     string name = msbname.Data;
